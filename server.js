@@ -1,4 +1,5 @@
 const dotenv = require('dotenv');
+const connectDb = require('./db/db');
 
 process.on('uncaughtException', err => {
    console.log(err.name, err.message);
@@ -9,6 +10,9 @@ process.on('uncaughtException', err => {
  dotenv.config({ path: './config/config.env' });
 
  const app = require('./app');
+
+ // connect to db
+ connectDb();
 
  const PORT = process.env.PORT || 8000;
 
