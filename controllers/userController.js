@@ -1,5 +1,6 @@
 exports.getMe = (req, res, next) => {
-   res.send({
+   console.log(req)
+   res.status(200).send({
       data: 'Here is your data'
    })
  };

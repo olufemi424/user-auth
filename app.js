@@ -8,6 +8,7 @@ const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
 
 const AppError = require('./utils/appError');
+const globalErrorHandler = require('./controllers/errorController');
 
 const userRouter = require('./routes/userRoutes');
 
@@ -88,6 +89,9 @@ app.all('*', (req, res, next) => {
    );
    next(error);
 });
+
+//error handling
+app.use(globalErrorHandler);
 
 //Start Server
 module.exports = app;
