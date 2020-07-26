@@ -22,38 +22,36 @@ app.use(helmet());
 
 // development loggin
 if (process.env.NODE_ENV === 'development') {
-   app.use(morgan('dev')); // logger middleware
+  app.use(morgan('dev')); // logger middleware
 }
 
 // limit requet from same apu
 const limiter = rateLimit({
-   max: 100,
-   windowMs: 60 * 60 * 1000,
-   message: 'Too many reqiests from this IP, please try again in an hour!'
+  max: 100,
+  windowMs: 60 * 60 * 1000,
+  message: 'Too many reqiests from this IP, please try again in an hour!'
 });
 
 //limit all request on API end-point
-app.use('/api', limiter); 
+app.use('/api', limiter);
 
 // Body parser, reading data from the body into req.body
 // built-in json middleware
 app.use(
-   express.json({
-     limit: '10kb'
-   })
+  express.json({
+    limit: '10kb'
+  })
 );
 
- // parse url encoded, such as default form submissions.
+// parse url encoded, such as default form submissions.
 app.use(
-   express.urlencoded({ 
-      extended: true, 
-      limit: '10kb' 
-   })
+  express.urlencoded({
+    extended: true,
+    limit: '10kb'
+  })
 );
 
-// Parse Cookie header and populate req.cookies with an object keyed by the cookie names.
-// Optionally you may enable signed cookie support by passing a secret string,
-// which assigns req.secret so it may be used by other middleware.
+// Parse Cookie header and populate req.cookies with an object keyed by the cookie names. Optionally you may enable signed cookie support by passing a secret string, which assigns req.secret so it may be used by other middleware.
 app.use(cookieParser());
 
 // Data sanitization against XSS
@@ -61,21 +59,21 @@ app.use(xss());
 
 // middleware to protect against HTTP Parameter Pollution attacks
 app.use(
-   hpp({
-     whitelist: []
-   })
+  hpp({
+    whitelist: []
+  })
 );
 
 //Test middleware
 app.use((req, res, next) => {
-   console.log('{}: Inside test middleware :{}')
-   next();
+  console.log('{}: Inside test middleware :{}');
+  next();
 });
 
 // add request time to the req
 app.use((req, res, next) => {
-   req.reqestTime = new Date().toISOString();
-   next();
+  req.reqestTime = new Date().toISOString();
+  next();
 });
 
 // Routes
@@ -83,11 +81,11 @@ app.use('/api/v1/users', userRouter);
 
 //not found error handling
 app.all('*', (req, res, next) => {
-   const error = new AppError(
-     `Can't find ${req.originalUrl} on this server!`,
-     404
-   );
-   next(error);
+  const error = new AppError(
+    `Can't find ${req.originalUrl} on this server!`,
+    404
+  );
+  next(error);
 });
 
 //error handling
