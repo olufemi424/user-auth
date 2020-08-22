@@ -12,7 +12,7 @@ const connectDB = async () => {
       }
     );
 
-    console.log(`DB connectd: ${conn.connection.host}`);
+    console.log(`DB connected: ${conn.connection.host}`);
   } catch (err) {
     console.log(`Error: ${err.message}`);
   }
