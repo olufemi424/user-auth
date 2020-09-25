@@ -14,3 +14,11 @@ exports.getSignUpForm = catchAsync(async (req, res, next) => {
 exports.getLoginForm = catchAsync(async (req, res, next) => {
   res.status(200).render('login', { title: 'Login To Your Accout' });
 });
+
+exports.getResetPasswordForm = catchAsync(async (req, res, next) => {
+  res.status(200).render('reset', { title: 'Reset Password' });
+});
+
+exports.getUserAccoutPage = catchAsync(async (req, res, next) => {
+  res.status(200).render('user-profile', { title: 'Reset Password' });
+});

@@ -1,10 +1,14 @@
 <%- include('partials/header') %>
 
-<div class="container">
+<div class="container my-4">
   <header>
     <h2 class="heading-primary">
       This is home page
     </h2>
+
+    <% if (locals.user) { %>
+      <h4><%= user.name %></h4>
+    <% } %>
   </header>
 </div>
 

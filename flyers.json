@@ -1,0 +1,15 @@
+{
+   "title":"title",
+   "date":"date",
+   "dj":"dj",
+   "hosts":["hosts", "hosts"],
+   "time":"time",
+   "extra":"extra",
+   "club":"club",
+   "address":"address",
+   "rsvp":"rsvp",
+   "for_more_info":"for_more_info",
+   "hashtags":["#hashtags", "#hashtags", "#hashtags", "#hashtags"],
+   "others":"others",
+   "location":"location"
+}

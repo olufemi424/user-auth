@@ -10,7 +10,8 @@ router.use('*', authController.isLoggedIn);
 router.get('/', viewsController.getHomePage);
 router.get('/signup', viewsController.getSignUpForm);
 router.get('/login', viewsController.getLoginForm);
-router.get('/logout', authController.logout);
+router.get('/reset', viewsController.getResetPasswordForm);
+router.get('/account', viewsController.getUserAccoutPage);
 
 // router.get('/me', userController.getMe);
 

@@ -1,31 +1,25 @@
 <%- include('partials/header') %>
 <div class="container">
-  <h5 class="text-dark my-4">Reset Password</h5>
+  <h5 class="text-dark my-4 text-center">Reset Password</h5>
   <div class="row">
    <div class="col d-flex justify-content-center">
-      <form action="/api/v1/users/signup" method="POST" style="width: 50%;">
+      <form class="form-reset-password"  style="min-width: 50%;">
          <div class="form-group">
-            <label for="nameInput">Full Name</label>
-            <input type="name" id="nameInput" name="name" class="form-control">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+           <label for="exampleInputEmail1">Email address</label>
+           <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+           <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
          </div>
          <div class="form-group">
-            <label for="emailInput">Email address</label>
-            <input type="email" id="emailInput" name="email" class="form-control">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+           <label for="password">New Password</label>
+           <input type="password" name="newPassword" class="form-control" id="password">
          </div>
          <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" name="password" class="form-control">
+           <label for="passwordConfirm">Confirm New Password</label>
+           <input type="password" name="passwordConfirm" class="form-control" id="passwordConfirm">
          </div>
-         <div class="form-group">
-            <label for="confirmPassInput">Confirm Password</label>
-            <input type="password" id="confirmPassInput" name="passwordConfirm" class="form-control">
-         </div>
-         <button type="submit" class="btn btn-primary">Sign up</button>
+         <button type="submit" class="btn btn-primary">Reset Password</button>
       </form>
    </div>
   </div>
 </div>
-
 <%- include('partials/footer') -%>
