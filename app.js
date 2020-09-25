@@ -14,9 +14,13 @@ const userRouter = require('./routes/userRoutes');
 
 const app = express();
 
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
 // 1.GLOBAL MIDDLEWARES
 //serving static files
 app.use(express.static(path.join(__dirname, 'public')));
+
 //Helmet helps secure Express apps by setting various HTTP headers. It's not a silver bullet, but it can help!
 app.use(helmet());
 
@@ -78,6 +82,9 @@ app.use((req, res, next) => {
 
 // Routes
 app.use('/api/v1/users', userRouter);
+
+// Pages
+app.get('/', (req, res) => res.status(200).render('home'));
 
 //not found error handling
 app.all('*', (req, res, next) => {
