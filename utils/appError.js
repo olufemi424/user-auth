@@ -1,3 +1,9 @@
+/*
+  App Error constructor takes in two parameters
+  @ 0 String - Error message 
+  @ 1 Number - Error Status cose
+*/
+
 class AppError extends Error {
   constructor(message, statusCode) {
     super(message);

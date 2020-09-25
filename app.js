@@ -10,6 +10,7 @@ const cookieParser = require('cookie-parser');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
+const viewRouter = require('./routes/viewRoutes');
 const userRouter = require('./routes/userRoutes');
 
 const app = express();
@@ -68,23 +69,15 @@ app.use(
   })
 );
 
-//Test middleware
-app.use((req, res, next) => {
-  console.log('{}: Inside test middleware :{}');
-  next();
-});
-
 // add request time to the req
 app.use((req, res, next) => {
   req.reqestTime = new Date().toISOString();
   next();
 });
 
-// Routes
+// ROUTES
+app.use('/', viewRouter);
 app.use('/api/v1/users', userRouter);
-
-// Pages
-app.get('/', (req, res) => res.status(200).render('home'));
 
 //not found error handling
 app.all('*', (req, res, next) => {
@@ -95,8 +88,8 @@ app.all('*', (req, res, next) => {
   next(error);
 });
 
-//error handling
+// error handling
 app.use(globalErrorHandler);
 
-//Start Server
+// Start Server
 module.exports = app;

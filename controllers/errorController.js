@@ -13,9 +13,9 @@ const sendErrorForDev = (err, req, res) => {
     });
   }
   //error for render website
-  console.log('something went wrong< no rought was matched');
+  console.log('something went wrong< no rout was matched');
   return res.status(err.statusCode).render('error', {
-    title: 'Something went wrong,  no rought was matched.',
+    title: 'Something went wrong',
     msg: err.message
   });
 };
