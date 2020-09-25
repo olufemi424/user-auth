@@ -23,7 +23,7 @@ exports.updateOne = Model => {
     });
 
     if (!doc) {
-      return next(new AppError('No Tour found with that ID', 404));
+      return next(new AppError('No Document found with that ID', 404));
     }
 
     res.status(200).json({
@@ -44,6 +44,7 @@ exports.createOne = Model => {
     });
   });
 };
+
 /**
  * getone is a factory function to find one document in
  * the data base

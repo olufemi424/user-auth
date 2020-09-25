@@ -71,6 +71,7 @@ app.use(
 
 // add request time to the req
 app.use((req, res, next) => {
+  console.log('cookies', req.cookies);
   req.reqestTime = new Date().toISOString();
   next();
 });

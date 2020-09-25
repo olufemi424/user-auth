@@ -37,13 +37,54 @@ const createSendToken = (user, statusCode, res) => {
    * to the user
    */
   user.password = undefined; /*eslint no-param-reassign: "error"*/
-  res.status(statusCode).json({
-    status: 'success',
-    token,
-    data: {
-      user: user
+  // res.redirect('/'); // Temporary fix
+  res // todo fix Cannot set headers after they are sent to the client(change login and logout to api calls)
+    .redirect('/')
+    .status(statusCode)
+    .json({
+      status: 'success',
+      token,
+      data: {
+        user: user
+      }
+    });
+};
+
+/**
+ * Only for rendering pages, no errors
+ * this checkes to see if there is a user that is already
+ * logged in by checking the cookies, and attaching the user object
+ * to the body of the response
+ */
+exports.isLoggedIn = async (req, res, next) => {
+  if (req.cookies && req.cookies.jwt) {
+    try {
+      // 1) Verification token
+      const decoded = await promisify(jwt.verify)(
+        req.cookies.jwt,
+        process.env.JWT_SECRET
+      );
+
+      // 2) check if user still exists
+      const currentUser = await User.findById(decoded.id);
+      if (!currentUser) {
+        return next();
+      }
+
+      // 3) Check if user changed password after the token was issued
+      if (currentUser.changedPasswordAfter(decoded.iat)) {
+        return next();
+      }
+
+      // THERE IS A LOGGED IN USER
+      res.locals.user = currentUser;
+      return next();
+    } catch (err) {
+      return next();
     }
-  });
+  }
+
+  next(); // in case no cookie call the next middleware
 };
 
 /**
@@ -93,6 +134,9 @@ exports.protect = catchAsync(async (req, res, next) => {
   next();
 });
 
+/**
+ * Sign up user
+ */
 exports.signup = catchAsync(async (req, res, next) => {
   const newUser = await User.create({
     name: req.body.name,
@@ -108,6 +152,44 @@ exports.signup = catchAsync(async (req, res, next) => {
     }
   });
 });
+
+/**
+ * logout user by sending a dummy token that expirsed in 10seconds
+ */
+
+exports.logout = (req, res, next) => {
+  try {
+    res.cookie('jwt', '', {
+      httpOnly: true,
+      expires: new Date(Date.now() + 10 * 1000)
+    });
+    res.redirect('/');
+  } catch (error) {
+    return next(new AppError('unable to logout! Please login again', 400));
+  }
+};
+
+/**
+ * restrict access tp unauthorized users
+ * @param  {...any} roles these are roles of users, passed i
+ * as arguements (see userModel.js to know the roles)
+ */
+
+exports.restrictTo = (...roles) => {
+  return (req, res, next) => {
+    //roles ["admin", "lead-guide"]. role ='user'
+    if (!roles.includes(req.user.role)) {
+      return next(
+        new AppError('You do not have permission to perfome this action', 403)
+      );
+    }
+    next();
+  };
+};
+
+/**
+ * Login into the app, using password and email
+ */
 
 exports.login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;

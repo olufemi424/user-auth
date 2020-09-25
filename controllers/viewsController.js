@@ -3,6 +3,10 @@
 // const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 
+exports.getHomePage = catchAsync(async (req, res, next) => {
+  res.status(200).render('home', { title: 'Home' });
+});
+
 exports.getSignUpForm = catchAsync(async (req, res, next) => {
   res.status(200).render('signup', { title: 'Create An Account' });
 });
