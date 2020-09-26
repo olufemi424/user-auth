@@ -231,8 +231,6 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     'host'
   )}/api/v1/users/resetPassword/${resetToken}`;
 
-  console.log(resetUrl);
-
   // const message = `Forgot your password? Submit a patch request with your new password and passowrdConfirm to ${resetUrl}.\nIf you didn't forget your password, please ignore this email!`;
 
   try {
@@ -244,7 +242,8 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
     res.status(200).json({
       status: 'success',
-      message: 'Token sent to email'
+      message: 'Token sent to email',
+      resetUrl: resetUrl
     });
   } catch (err) {
     user.passwordResetToken = undefined;
@@ -289,22 +288,22 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   createSendToken(user, 201, res);
 });
 
-// exports.updatePassword = catchAsync(async (req, res, next) => {
-//   //1.) Get user from collection
-//   const user = await User.findById(req.user.id).select('+password');
-//   //2.) check if the posted currrent password is correct
-//   console.log(req.body.passwordCurrent, user.password);
-//   if (!user.correctPassword(req.body.passwordCurrent, user.password)) {
-//     return next(new AppError('Your current password is wrong!', 401));
-//   }
+exports.updatePassword = catchAsync(async (req, res, next) => {
+  //1.) Get user from collection
+  const user = await User.findById(req.user.id).select('+password');
+  //2.) check if the posted currrent password is correct
+  console.log(req.body.passwordCurrent, user.password);
+  if (!user.correctPassword(req.body.passwordCurrent, user.password)) {
+    return next(new AppError('Your current password is wrong!', 401));
+  }
 
-//   //3.) if so, update password
-//   user.password = req.body.password;
-//   user.passwordConfirm = req.body.passwordConfirm;
+  //3.) if so, update password
+  user.password = req.body.password;
+  user.passwordConfirm = req.body.passwordConfirm;
 
-//   await user.save();
-//   //user.findOneAndUpdate will not work here
+  await user.save();
+  //user.findOneAndUpdate will not work here
 
-//   //4.) log user in, and send jwt.
-//   createSendToken(user, 201, res);
-// });
+  //4.) log user in, and send jwt.
+  createSendToken(user, 201, res);
+});

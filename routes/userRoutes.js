@@ -7,11 +7,12 @@ const router = express.Router();
 router.post('/signup', authController.signup);
 router.post('/login', authController.login);
 router.get('/logout', authController.logout);
-router.post('/forgotPassword', authController.forgotPassword);
-router.patch('/resetPassword/:token', authController.resetPassword);
+router.post('/forgotPassword', authController.forgotPassword); // TODO protect route from unauthenticated users
+router.patch('/resetPassword/:token', authController.resetPassword); // TODO protect route from unauthenticated users
 
 //protect other routes from un-authenticated user
 router.use(authController.protect);
+router.patch('/updateMyPassword', authController.updatePassword); //todo, why doees it need to be protected. "You do not have permission to perfome this action"
 
 router.get(
   '/me',

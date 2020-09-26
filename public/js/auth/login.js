@@ -54,7 +54,7 @@ export const logout = async () => {
      });
 
      //reload the same page
-     if (res.data.status === 'success') location.reload();
+     if (res.data.status === 'success') location.assign('/login');
    } catch (err) {
      console.log('Error logging out', Err)
    }
@@ -76,5 +76,26 @@ export const logout = async () => {
      if (res.data.status === 'success') location.reload();
    } catch (err) {
      console.log('Error logging out', Err)
+   }
+ };
+
+ export const updatePassword = async (email, newPassword, passwordConfirm, $form) => {
+   try {
+     const res = await axios({
+       method: 'POST',
+       url: '/api/v1/users/updateMyPassword',
+       data: {
+        email,
+        newPassword,
+        passwordConfirm
+      }
+     });
+     //reload the same page
+    if (res.data.status === 'success') {
+      $form.append(`<p>${res.data.message}</p>`)
+    }
+
+   } catch (err) {
+     $form.append(`<p>${err.message}</p>`)
    }
  };

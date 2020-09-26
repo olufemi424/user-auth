@@ -15,10 +15,16 @@ exports.getLoginForm = catchAsync(async (req, res, next) => {
   res.status(200).render('login', { title: 'Login To Your Accout' });
 });
 
+exports.getForgetPasswordForm = catchAsync(async (req, res, next) => {
+  res.status(200).render('forget-password', {
+    title: 'Forget Password'
+  });
+});
+
 exports.getResetPasswordForm = catchAsync(async (req, res, next) => {
-  res.status(200).render('reset', { title: 'Reset Password' });
+  res.status(200).render('update-password', { title: 'Upadate Password' });
 });
 
 exports.getUserAccoutPage = catchAsync(async (req, res, next) => {
-  res.status(200).render('user-profile', { title: 'Reset Password' });
+  res.status(200).render('user-profile', { title: 'Profile' });
 });

@@ -2,18 +2,30 @@
 
 <div class="container my-4">
   <h3 class="text-center">User Profile for <%= user.name %></h3>
-  <ul class="nav nav-tabs">
-    <li class="nav-item">
-      <a class="nav-link active" href="/reset">Reset Password</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
-    </li>
-  </ul>
   
+  <%- include('partials/account-tab') -%>
+  <h5 class="text-dark my-4 text-center">Profile</h5>
+  <div class="row">
+    <div class="col d-flex justify-content-center">
+      <form class="form-update-user"  style="min-width: 50%;">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" name="name" value="<%= user.name %>" class="form-control" id="name">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <input type="email" name="email" class="form-control" value="<%= user.email %>" id="email" aria-describedby="email" disabled>
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+          <label for="role">Role</label>
+          <input type="text" name="role" value="<%= user.role %>" class="form-control" id="role" disabled>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+      </form>
+    </div>
+  </div>
+
 </div>
 
 <%- include('partials/footer') -%>
