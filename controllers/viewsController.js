@@ -21,8 +21,12 @@ exports.getForgetPasswordForm = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getResetPasswordForm = catchAsync(async (req, res, next) => {
+exports.getUpadatePasswordForm = catchAsync(async (req, res, next) => {
   res.status(200).render('update-password', { title: 'Upadate Password' });
+});
+
+exports.getResetPasswordForm = catchAsync(async (req, res, next) => {
+  res.status(200).render('reset-password', { title: 'Upadate Password' });
 });
 
 exports.getUserAccoutPage = catchAsync(async (req, res, next) => {

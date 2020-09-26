@@ -11,16 +11,18 @@ router.get('/', viewsController.getHomePage);
 router.get('/signup', viewsController.getSignUpForm);
 router.get('/login', viewsController.getLoginForm);
 router.get('/forget-password', viewsController.getForgetPasswordForm);
+router.get('/reset-password/:token', viewsController.getResetPasswordForm);
 
 router.get(
   '/account',
   authController.protect,
   viewsController.getUserAccoutPage
 );
+
 router.get(
   '/account/reset',
   authController.protect,
-  viewsController.getResetPasswordForm
+  viewsController.getUpadatePasswordForm
 );
 
 // router.get('/me', userController.getMe);

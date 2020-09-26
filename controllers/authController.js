@@ -229,7 +229,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   //3) sent it to users email
   const resetUrl = `${req.protocol}://${req.get(
     'host'
-  )}/api/v1/users/resetPassword/${resetToken}`;
+  )}/reset-password/${resetToken}`;
 
   // const message = `Forgot your password? Submit a patch request with your new password and passowrdConfirm to ${resetUrl}.\nIf you didn't forget your password, please ignore this email!`;
 
@@ -261,6 +261,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
 //this function will only be successful if the it is called less than 10mins after forgot password is called
 exports.resetPassword = catchAsync(async (req, res, next) => {
+  console.log('here');
   //1) Get user based on the token
   const hashedToken = crypto
     .createHash('sha256')

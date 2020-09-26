@@ -24,7 +24,7 @@ export const signup = async (name, email, password, passwordConfirm) => {
   }
 };
 
-export const login = async (email, password) => {
+export const login = async (email, password, $form) => {
   try {
     const res = await axios({
       method: 'POST',
@@ -41,12 +41,12 @@ export const login = async (email, password) => {
       }, 1500);
     }
   } catch (err) {
+    $form.append(`<p>${err.message}</p>`)
     console.log('error', err)
   }
 };
 
 export const logout = async () => {
-  console.log('here')
    try {
      const res = await axios({
        method: 'GET',
@@ -56,46 +56,68 @@ export const logout = async () => {
      //reload the same page
      if (res.data.status === 'success') location.assign('/login');
    } catch (err) {
-     console.log('Error logging out', Err)
+     console.log('Error logging out', err)
    }
  };
 
- export const resetPassword = async (email, newPassword, passwordConfirm) => {
+ export const requestPasswordReset = async (email, $form) => {
    try {
      const res = await axios({
        method: 'POST',
-       url: '/api/v1/users/resetPassword',
+       url: '/api/v1/users/forgotPassword',
        data: {
-        email,
-        newPassword,
-        passwordConfirm
+        email
       }
      });
-     
-     //reload the same page
-     if (res.data.status === 'success') location.reload();
+
+     if (res.data.status === 'success') $form.append(`<p>${res.data.message}</p>`)
    } catch (err) {
-     console.log('Error logging out', Err)
+     console.log('Error logging out', err)
    }
  };
 
- export const updatePassword = async (email, newPassword, passwordConfirm, $form) => {
+ export const resetPassword = async (password, passwordConfirm, $form) => {
+  const url_string = window.location.href.split('/');
+  const token = url_string[url_string.length - 1 ];
+
+  try {
+  const res = await axios({
+    method: 'PATCH',
+    url: `/api/v1/users/reset-password/${token}`,
+    data: {
+    password,
+    passwordConfirm
+  }
+  });
+
+  if (res.data.status === 'success') {
+    // todo give user feedback about success
+    console.log("Your password is reset successfully")
+    location.assign('/');
+  }
+  
+  } catch (err) {
+  $form.append(`<p>${err.message}</p>`);
+    console.log('Error logging out', err);
+  }
+ };
+
+ export const updatePassword = async (email, passwordCurrent, password, passwordConfirm, $form) => {
    try {
      const res = await axios({
-       method: 'POST',
+       method: 'PATCH',
        url: '/api/v1/users/updateMyPassword',
        data: {
         email,
-        newPassword,
+        passwordCurrent,
+        password,
         passwordConfirm
       }
      });
      //reload the same page
-    if (res.data.status === 'success') {
-      $form.append(`<p>${res.data.message}</p>`)
-    }
+    if (res.data.status === 'success') location.reload(''); // TODO: get response to give user feed back
 
    } catch (err) {
-     $form.append(`<p>${err.message}</p>`)
+     $form.append(`<p>${err.message}</p>`);
    }
  };
