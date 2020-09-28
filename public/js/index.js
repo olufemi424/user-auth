@@ -1,6 +1,12 @@
 /* eslint-disable */
 import '@babel/polyfill';
-import { login, logout, signup, resetPassword, updatePassword, requestPasswordReset } from './auth/login';
+import { login,
+   logout,
+   signup,
+   resetPassword,
+   updatePassword,
+   requestPasswordReset,
+   updateUser } from './auth/login';
 
 // DOM ELEMENTS
 const signupForm = document.querySelector('.form--signup');
@@ -9,6 +15,7 @@ const logOutBtn = document.querySelector('.nav-link--logout');
 const resetPasswordForm = document.querySelector('.form--reset-password');
 const updatePasswordForm = document.querySelector('.form--update-password');
 const forgetPasswordForm = document.querySelector('.form--forget-password');
+const updateUserForm = document.querySelector('.form--update-user');
 
 if (signupForm) {
    signupForm.addEventListener('submit', e => {
@@ -57,5 +64,13 @@ if (updatePasswordForm) {
       const password = document.getElementById('password').value;
       const passwordConfirm = document.getElementById('passwordConfirm').value;
       updatePassword(email, passwordCurrent, password, passwordConfirm, updatePasswordForm);
+   });
+ }
+
+if (updateUserForm) {
+   updateUserForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      updateUser(name, updateUserForm);
    });
  }

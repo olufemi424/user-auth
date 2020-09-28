@@ -115,9 +115,25 @@ export const logout = async () => {
       }
      });
      //reload the same page
-    if (res.data.status === 'success') location.reload(''); // TODO: get response to give user feed back
+    if (res.data.status === 'success') location.reload(); // TODO: get response to give user feed back
 
    } catch (err) {
      $form.append(`<p>${err.message}</p>`);
    }
  };
+
+ // TODO: endpoint where user can update their information
+//  export const updateUser = async (name, $form) => {
+//    try {
+//      const res = await axios({
+//        method: 'PATCH',
+//        url: '/api/v1/users/',
+//        data: { name }
+//      });
+//      //reload the same page
+//     if (res.data.status === 'success') location.reload(''); 
+
+//    } catch (err) {
+//      $form.append(`<p>${err.message}</p>`);
+//    }
+//  };

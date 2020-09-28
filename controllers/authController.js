@@ -38,7 +38,6 @@ const createSendToken = (user, statusCode, res) => {
    * to the user
    */
   user.password = undefined; /*eslint no-param-reassign: "error"*/
-  // res.redirect('/'); // Temporary fix
   res.status(statusCode).json({
     status: 'success',
     token,
