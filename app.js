@@ -16,6 +16,8 @@ const flyerRoute = require('./routes/flyerRoutes');
 
 const app = express();
 
+app.engine('ejs', require('express-ejs-extend'));
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 

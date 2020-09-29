@@ -23,7 +23,7 @@ const createSendToken = (user, statusCode, res) => {
 
   //only want cookie in production
   if (process.env.NODE_ENV === 'production') {
-    cookieOptions.secure = true;
+    // cookieOptions.secure = true; // TODO: enable this for production
   }
 
   /**
