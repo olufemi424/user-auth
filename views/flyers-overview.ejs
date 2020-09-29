@@ -2,9 +2,20 @@
 
 <div class="container my-4">
   <header>
-    <h2 class="heading-primary">
-      Flyers overview
-    </h2>
+    <div class="row">
+      <div class="col-md">
+        <%- include('flyers/create') -%>
+      </div>
+      <div class="col-md">
+        <h5 class="text-dark my-4 text-center">List of in progress flyer goes here</h5>
+        <ul>
+          <li>Flyer 1 <span class="text-primary">In Progress</span></li>
+          <li>Flyer 2</li>
+          <li>Flyer 2</li>
+          <li>Flyer 2</li>
+        </ul>
+      </div>
+    </div>
 
   </header>
 </div>

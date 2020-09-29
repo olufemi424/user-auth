@@ -23,5 +23,7 @@
 <header class="container">
   <% if (locals.user) { %>
     <div class="text-dark py-4">Welcome <%= locals.user.name %></div>
+    <% } else { %>
+  <div class="text-dark py-4">Welcome Guest User</div>
   <% } %>
   </header>

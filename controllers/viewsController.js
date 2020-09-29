@@ -32,3 +32,7 @@ exports.getResetPasswordForm = catchAsync(async (req, res, next) => {
 exports.getUserAccoutPage = catchAsync(async (req, res, next) => {
   res.status(200).render('user-profile', { title: 'Profile' });
 });
+
+exports.getFlyersPage = catchAsync(async (req, res, next) => {
+  res.status(200).render('flyers-overview', { title: 'Flyers' });
+});

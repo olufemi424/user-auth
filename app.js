@@ -12,6 +12,7 @@ const globalErrorHandler = require('./controllers/errorController');
 
 const viewRouter = require('./routes/viewRoutes');
 const userRouter = require('./routes/userRoutes');
+const flyerRoute = require('./routes/flyerRoutes');
 
 const app = express();
 
@@ -78,6 +79,7 @@ app.use((req, res, next) => {
 // ROUTES
 app.use('/', viewRouter);
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/flyer', flyerRoute);
 
 //not found error handling
 app.all('*', (req, res, next) => {

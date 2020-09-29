@@ -25,6 +25,8 @@ router.get(
   viewsController.getUpadatePasswordForm
 );
 
+router.get('/flyers', authController.protect, viewsController.getFlyersPage);
+
 // router.get('/me', userController.getMe);
 
 module.exports = router;
