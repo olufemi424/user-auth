@@ -81,7 +81,7 @@ app.use((req, res, next) => {
 // ROUTES
 app.use('/', viewRouter);
 app.use('/api/v1/users', userRouter);
-app.use('/api/v1/flyer', flyerRoute);
+app.use('/api/v1/flyers', flyerRoute);
 
 //not found error handling
 app.all('*', (req, res, next) => {
