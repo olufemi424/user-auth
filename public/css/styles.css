@@ -63,6 +63,6 @@ body {
   border-radius: 50%;
 }
 
-#create-head-section{
+.divider-tb {
   border-top: rgba(246, 193, 68, 0.808) 0.5px solid;
 }
