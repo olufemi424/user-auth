@@ -8,14 +8,15 @@
   <h5 class="text-dark my-4 text-center">Profile</h5>
   <div class="row">
     <div class="col d-flex justify-content-center">
-      <form class="form--update-user"  style="min-width: 50%;">
+      <form class="form--update-user" style="min-width: 50%;">
         <div class="form-group">
           <label for="name">Name</label>
           <input type="text" name="name" value="<%= user.name %>" class="form-control" id="name">
         </div>
         <div class="form-group">
           <label for="exampleInputEmail1">Email address</label>
-          <input type="email" name="email" class="form-control" value="<%= user.email %>" id="email" aria-describedby="email" disabled>
+          <input type="email" name="email" class="form-control" value="<%= user.email %>" id="email"
+            aria-describedby="email" disabled>
           <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
         <div class="form-group">
